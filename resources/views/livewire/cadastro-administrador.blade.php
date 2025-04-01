@@ -1,14 +1,38 @@
 <div>
     <h2>Cadastro de Administrador</h2>
-    <form wire:submit.prevent="{{ $administrador_id ? 'update' : 'store' }}">
-        <input type="text" wire:model="nome" placeholder="Nome" required>
-        <input type="text" wire:model="cpf" placeholder="CPF" required>
-        <input type="email" wire:model="email" placeholder="Email" required>
-        <input type="password" wire:model="senha" placeholder="Senha" required>
-        <button type="submit">{{ $administrador_id ? 'Atualizar' : 'Cadastrar' }}</button>
-    </form>
 
     @if (session()->has('message'))
-        <div>{{ session('message') }}</div>
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
     @endif
+
+    <form wire:submit.prevent="store">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" wire:model="nome">
+        </div>
+
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" wire:model="cpf">
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" wire:model="email">
+        </div>
+
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" wire:model="senha">
+        </div>
+
+        <div>
+            <label for="senha_confirmation">Confirmar Senha:</label>
+            <input type="password" id="senha_confirmation" wire:model="senha_confirmation">
+        </div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
 </div>

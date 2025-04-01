@@ -18,8 +18,10 @@ return new class extends Migration
             $table->decimal('valor_com_desconto', 10, 2)->nullable(false);
             $table->string('forma_pagamento');
             $table->enum('status', ['em_aberto', 'aguardando_preparo', 'em_preparo', 'em_rota', 'entregue']);
-            $table->timestamps();
+            $table->timestamp('data_hora_pedido');  // Adicionando o campo data_hora_pedido
+            $table->timestamps();  // Isso cria as colunas created_at e updated_at automaticamente
         });
+        
     }
 
     /**
