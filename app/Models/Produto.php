@@ -14,4 +14,11 @@ class Produto extends Model
         'ingredientes',
         'valor'   
     ];
+
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class)
+                    ->withPivot('quantidade', 'preco')
+                    ->withTimestamps();
+    }
 }
