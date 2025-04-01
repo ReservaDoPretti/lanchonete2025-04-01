@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class CadastroAdministrador extends Component
 {
-    public $nome, $cpf, $email, $senha, $administrador_id;
+    public $nome, $cpf, $email, $password, $administrador_id;
 
     public function store()
     {
@@ -15,14 +15,14 @@ class CadastroAdministrador extends Component
             'nome' => 'required|string|max:255',
             'cpf' => 'required|unique:administradores,cpf',
             'email' => 'required|email|unique:administradores,email',
-            'senha' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         Administrador::create([
             'nome' => $this->nome,
             'cpf' => $this->cpf,
             'email' => $this->email,
-            'senha' => bcrypt($this->senha),
+            'password' => bcrypt($this->password),
         ]);
 
         session()->flash('message', 'Administrador criado com sucesso!');
@@ -34,7 +34,7 @@ class CadastroAdministrador extends Component
         $this->nome = '';
         $this->cpf = '';
         $this->email = '';
-        $this->senha = '';
+        $this->password = '';
         $this->administrador_id = null;
     }
 

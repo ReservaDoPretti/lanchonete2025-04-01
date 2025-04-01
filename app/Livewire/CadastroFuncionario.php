@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class CadastroFuncionario extends Component
 {
-    public $nome, $cpf, $email, $senha, $funcionario_id;
+    public $nome, $cpf, $email, $password, $funcionario_id;
 
     // Método para armazenar novo funcionário
     public function store()
@@ -16,14 +16,14 @@ class CadastroFuncionario extends Component
             'nome' => 'required|string|max:255',
             'cpf' => 'required|unique:funcionarios,cpf',
             'email' => 'required|email|unique:funcionarios,email',
-            'senha' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         Funcionario::create([
             'nome' => $this->nome,
             'cpf' => $this->cpf,
             'email' => $this->email,
-            'senha' => bcrypt($this->senha),
+            'password' => bcrypt($this->password),
         ]);
 
         session()->flash('message', 'Funcionário criado com sucesso!');
@@ -47,7 +47,7 @@ class CadastroFuncionario extends Component
             'nome' => 'required|string|max:255',
             'cpf' => 'required|unique:funcionarios,cpf,' . $this->funcionario_id,
             'email' => 'required|email|unique:funcionarios,email,' . $this->funcionario_id,
-            'senha' => 'nullable|min:6|confirmed',
+            'password' => 'nullable|min:6|confirmed',
         ]);
 
         $funcionario = Funcionario::find($this->funcionario_id);
@@ -55,7 +55,7 @@ class CadastroFuncionario extends Component
             'nome' => $this->nome,
             'cpf' => $this->cpf,
             'email' => $this->email,
-            'senha' => $this->senha ? bcrypt($this->senha) : $funcionario->senha,
+            'password' => $this->password ? bcrypt($this->password) : $funcionario->password,
         ]);
 
         session()->flash('message', 'Funcionário atualizado com sucesso!');
@@ -68,7 +68,7 @@ class CadastroFuncionario extends Component
         $this->nome = '';
         $this->cpf = '';
         $this->email = '';
-        $this->senha = '';
+        $this->password = '';
         $this->funcionario_id = null;
     }
 

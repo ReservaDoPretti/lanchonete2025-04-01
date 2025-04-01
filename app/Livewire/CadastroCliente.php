@@ -12,7 +12,7 @@ class CadastroCliente extends Component
     public $telefone;
     public $cpf;
     public $email;
-    public $senha;
+    public $password;
 
     protected $rules = [
         'nome' => 'required|min:3',
@@ -20,7 +20,7 @@ class CadastroCliente extends Component
         'telefone' => 'required|numeric|digits:11',
         'cpf' => 'required|cpf',
         'email' => 'required|email|unique:clientes,email',
-        'senha' => 'required|min:6',
+        'password' => 'required|min:6',
     ];
 
     public function cadastrar()
@@ -33,7 +33,7 @@ class CadastroCliente extends Component
             'telefone' => $this->telefone,
             'cpf' => $this->cpf,
             'email' => $this->email,
-            'senha' => bcrypt($this->senha),
+            'password' => bcrypt($this->password),
         ]);
 
         session()->flash('message', 'Cliente cadastrado com sucesso!');

@@ -18,7 +18,7 @@ class AdministradorSeeder extends Seeder
                 'nome' => $faker->name,
                 'cpf' => $faker->cpf,  // Gerar CPF válido
                 'email' => $faker->unique()->safeEmail,
-                'senha' => bcrypt('password'),  // Defina uma senha padrão
+                'password' => bcrypt('password'),  // Defina uma senha padrão
             ]);
         }
     }
