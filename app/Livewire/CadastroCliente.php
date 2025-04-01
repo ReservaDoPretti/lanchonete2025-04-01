@@ -2,21 +2,25 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Cliente;
-use Illuminate\Support\Facades\Hash;
+use Livewire\Component;
 
 class CadastroCliente extends Component
 {
-    public $nome, $endereco, $telefone, $cpf, $email, $senha;
+    public $nome;
+    public $endereco;
+    public $telefone;
+    public $cpf;
+    public $email;
+    public $senha;
 
     protected $rules = [
-        'nome' => 'required|string|max:255',
-        'endereco' => 'required|string|max:255',
-        'telefone' => 'required|string|max:15',
-        'cpf' => 'required|unique:clientes,cpf|cpf',
+        'nome' => 'required|min:3',
+        'endereco' => 'required|min:5',
+        'telefone' => 'required|numeric|digits:11',
+        'cpf' => 'required|cpf',
         'email' => 'required|email|unique:clientes,email',
-        'senha' => 'required|min:6|confirmed',
+        'senha' => 'required|min:6',
     ];
 
     public function cadastrar()
@@ -29,10 +33,11 @@ class CadastroCliente extends Component
             'telefone' => $this->telefone,
             'cpf' => $this->cpf,
             'email' => $this->email,
-            'senha' => Hash::make($this->senha),
+            'senha' => bcrypt($this->senha),
         ]);
 
         session()->flash('message', 'Cliente cadastrado com sucesso!');
+        $this->reset();
     }
 
     public function render()
